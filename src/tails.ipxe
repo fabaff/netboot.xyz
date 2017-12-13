@@ -1,0 +1,30 @@
+#!ipxe
+
+# Tails Live
+# https://tails.boum.org/
+
+goto ${menu}
+
+:tails
+set os Tails
+menu ${os}
+item --gap Versions
+item 3.3 ${space} ${os} 3.3
+choose tails_version || goto tails_exit
+
+:tails_boot
+set tails_url https://amnesia.thetechstewart.com/tails/stable/tails-amd64-${tails_version}/tails-amd64-${tails_version}.iso
+
+imgfree
+kernel ${tails_url}.vmlinuz boot=live config hooks=filesystem username=live noeject ${console} fetch=${tails_url}.squashfs initrd=tails-${tails_version}.initrd.img
+module ${tails_url}.initrd.img
+# Used to resolve DNS
+module http://${boot_domain}/live-helpers/debian/libresolv.so.2 /lib/libresolv.so.2
+module http://${boot_domain}/live-helpers/debian/libnss_dns.so.2 /lib/libnss_dns.so.2
+boot
+goto tails_exit
+
+:tails_exit
+clear menu
+exit 0
+
