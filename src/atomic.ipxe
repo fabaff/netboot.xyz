@@ -15,7 +15,7 @@ item --gap Latest Releases
 item 27-20171211.0 ${space} Fedora ${os} 27 20171211.0
 isset ${osversion} || choose osversion || goto linux_menu
 set ova ${os} ${osversion}
-set dir ${atomic_base_dir}/fedora/Fedora-${osversion}/Atomic/${arch}/os
+set dir ${atomic_base_dir}/Fedora-${osversion}/Atomic/${arch}/os
 goto boottype
 
 :boottype
@@ -28,6 +28,8 @@ echo ${cls}
 iseq ${bt} rescue && goto rescue ||
 iseq ${bt} kickstart && goto kickstart ||
 goto boot
+
+#http://mirrors.rit.edu/fedora/alt/atomic/stable/Fedora-Atomic-27-20171211.0/Atomic/x86_64/os/images/pxeboot/
 
 :rescue
 set params rescue ||
