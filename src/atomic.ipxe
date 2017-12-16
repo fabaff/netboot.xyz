@@ -15,7 +15,7 @@ item --gap Latest Releases
 item 27-20171211.0 ${space} Fedora ${os} 27 20171211.0
 isset ${osversion} || choose osversion || goto linux_menu
 set ova ${os} ${osversion}
-set dir ${atomic_base_dir}/Fedora-${osversion}/Atomic/${arch}/os
+set dir ${atomic_base_dir}/Fedora-${os}-${osversion}/${os}/${arch}/os
 goto boottype
 
 :boottype
