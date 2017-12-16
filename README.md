@@ -42,6 +42,7 @@ Full documentation is at ReadTheDocs:
 * [Debian](https://debian.org)
 * [Devuan](https://devuan.org)
 * [Fedora](https://fedoraproject.org)
+* [Fedora Atomic](http://www.projectatomic.io)
 * [FreeBSD](https://freebsd.org)
 * [FreeDOS](http://www.freedos.org)
 * [Gentoo](https://gentoo.org)

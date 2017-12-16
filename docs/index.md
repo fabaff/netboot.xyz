@@ -46,6 +46,7 @@ You'll need to make sure to have [DOWNLOAD_PROTO_HTTPS](https://github.com/ipxe/
 * [Debian](https://debian.org)
 * [Devuan](https://devuan.org)
 * [Fedora](https://fedoraproject.org)
+* [Fedora Atomic](http://www.projectatomic.io)
 * [FreeBSD](https://freebsd.org)
 * [FreeDOS](http://www.freedos.org)
 * [Gentoo](https://gentoo.org)

@@ -1,0 +1,62 @@
+#!ipxe
+
+# Project Atomic
+# http://www.projectatomic.io
+
+goto ${menu} ||
+
+:fedora
+clear osversion
+clear sku_type
+clear ova
+set os Atomic
+menu Atomic - ${arch} - Image Sig Checks: [${img_sigs_enabled}]
+item --gap Latest Releases
+item 27-20171211.0 ${space} Fedora ${os} 27 20171211.0
+isset ${osversion} || choose osversion || goto linux_menu
+set ova ${os} ${osversion}
+set dir ${atomic_base_dir}/fedora/Fedora-${osversion}/Atomic/${arch}/os
+goto boottype
+
+:boottype
+menu ${os} ${arch} boot type
+item normal ${ova} install
+item rescue ${ova} rescue
+item kickstart ${ova} specify kickstart URL
+isset ${bt} || choose bt || goto fedora
+echo ${cls}
+iseq ${bt} rescue && goto rescue ||
+iseq ${bt} kickstart && goto kickstart ||
+goto boot
+
+:rescue
+set params rescue ||
+goto boot
+
+:kickstart
+echo -n Specify kickstart URL for ${os} ${osversion}: && read ksurl
+set params ks=${ksurl} ||
+goto boot
+
+:boot
+imgfree
+kernel http://${fedora_mirror}/${dir}/images/pxeboot/vmlinuz repo=http://${fedora_mirror}/${dir} ${params} ${console} initrd=initrd.img
+initrd http://${fedora_mirror}/${dir}/images/pxeboot/initrd.img
+echo
+echo MD5sums:
+md5sum vmlinuz initrd.img
+iseq ${img_sigs_enabled} true && goto verify_sigs || goto skip_sigs
+:verify_sigs
+echo
+echo Checking signatures...
+imgverify vmlinuz ${sigs}${dir}/images/pxeboot/vmlinuz.sig || goto error
+imgverify initrd.img ${sigs}${dir}/images/pxeboot/initrd.img.sig || goto error
+echo Signatures verified!
+echo
+:skip_sigs
+boot
+goto linux_menu
+
+:linux_menu
+clear menu
+exit 0
