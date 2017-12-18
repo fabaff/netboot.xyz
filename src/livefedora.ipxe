@@ -20,8 +20,6 @@ echo ${cls}
 goto live_fedora_version || chain ${menu}.ipxe || goto live_fedora_exit
 goto live_fedora_exit
 
-
-
 :live_fedora_version
 set util_path download.fedoraproject.org/pub/alt/releases/27/Labs/x86_64/iso/Fedora-Security-Live-x86_64-27-1.6.iso
 set util_file Fedora-Security-Live-x86_64-27-1.6.iso
