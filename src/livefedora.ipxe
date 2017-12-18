@@ -1,0 +1,45 @@
+#!ipxe
+
+# Fedora Spins/Labs
+# https://labs.fedoraproject.org/en/
+
+goto ${menu}
+
+:livefedora
+set os Fedora Live
+menu ${os}
+item --gap Versions
+item fedora-security ${space} Fedora Security Lab 27-1.6
+choose live_fedora_version || goto live_fedora_exit
+echo ${cls}
+goto ${live_fedora_version} ||
+chain ${menu}.ipxe || goto live_fedora_exit
+goto live_fedora_exit
+
+:live_fedora_version
+set util_path https://download.fedoraproject.org/pub/alt/releases/27/Labs/x86_64/iso/Fedora-Security-Live-x86_64-27-1.6.iso
+set util_file Fedora-Security-Live-x86_64-27-1.6.iso
+goto boot_memdisk
+
+:boot_memdisk
+imgfree
+kernel ${memdisk} iso raw
+initrd --name ${util_file} http://${util_path}
+echo
+echo MD5sums:
+md5sum memdisk ${util_file}
+iseq ${img_sigs_enabled} true && goto verify_sigs || goto skip_sigs
+:verify_sigs
+echo
+echo Checking signatures...
+imgverify memdisk ${sigs}memdisk.sig || goto error
+imgverify ${util_file} ${sigs}${menu}/${util_file}.sig || goto error
+echo Signatures verified!
+echo
+:skip_sigs
+boot
+goto live_fedora_exit
+
+:live_fedora_exit
+clear menu
+exit 0
