@@ -1,28 +1,30 @@
 #!ipxe
 
-# Fedora Spins/Labs
+# Fedora Labs
 # https://labs.fedoraproject.org/en/
 
 goto ${menu}
 
 :livefedora
-set os Fedora Live
-set release 27-1.6
+set os Fedora Labs
+set release 27
+set minor-release 1.6
 menu ${os}
 item --gap Versions
-item fedora-security ${space} Fedora Security Lab ${release}
-item fedora-astronomy ${space} Fedora Astronomy Lab ${release}
-item fedora-design ${space} Fedora Design Suite ${release}
-
+item Fedora-Security ${space} Fedora Security Lab ${release}-${minor_release}
+item Fedora-Astronomy ${space} Fedora Astronomy Lab ${release}-${minor_release}
+item Fedora-Design_suite ${space} Fedora Design Suite ${release}-${minor_release}
+item Fedora-Python-Classroom ${space} Fedora Python Classroom ${release}-${minor_release}
+item Fedora-Games ${space} Fedora Games ${release}-${minor_release}
 choose live_fedora_version || goto live_fedora_exit
 echo ${cls}
-#goto ${livegrml_version} || chain ${menu}.ipxe || goto live_fedora_exit
-goto live_fedora_version || chain ${menu}.ipxe || goto live_fedora_exit
+goto live_fedora_pre ||
+chain ${menu}.ipxe || goto live_fedora_exit
 goto live_fedora_exit
 
-:live_fedora_version
-set util_path https://download.fedoraproject.org/pub/alt/releases/27/Labs/x86_64/iso/Fedora-Security-Live-x86_64-27-1.6.iso
-set util_file Fedora-Security-Live-x86_64-27-1.6.iso
+:live_fedora_pre
+set util_path https://download.fedoraproject.org/pub/alt/releases/${release}/Labs/x86_64/iso/${live_fedora_version}-Live-x86_64-${release}-${minor_release}.iso
+set util_file ${live_fedora_version}-Live-x86_64-${release}-${minor_release}.iso
 goto boot_memdisk
 
 :boot_memdisk
