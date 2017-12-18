@@ -8,7 +8,7 @@ goto ${menu}
 :livefedora
 set os Fedora Labs
 set release 27
-set minor-release 1.6
+set minor_release 1.6
 menu ${os}
 item --gap Versions
 item Fedora-Security ${space} Fedora Security Lab ${release}-${minor_release}
