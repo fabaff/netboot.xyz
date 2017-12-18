@@ -5,18 +5,18 @@
 
 goto ${menu}
 
-:livefedora_labs
+:live_fedora_labs
 set os Fedora Lab
 menu ${os}
 item --gap Versions
 item fedora-security ${space} Fedora Security Lab 27-1.6
-choose livefedora_labs_version || goto livefedora_labs_exit
+choose live_fedora_labs_version || goto live_fedora_labs_exit
 echo ${cls}
 goto ${livegrml_version} ||
 chain ${menu}.ipxe || goto livegrml_exit
-goto livefedora_labs_exit
+goto live-fedora_labs_exit
 
-:grml-full
+:live_fedora_labs_version
 set util_path https://download.fedoraproject.org/pub/alt/releases/27/Labs/x86_64/iso/Fedora-Security-Live-x86_64-27-1.6.iso
 set util_file Fedora-Security-Live-x86_64-27-1.6.iso
 goto boot_memdisk
@@ -38,8 +38,8 @@ echo Signatures verified!
 echo
 :skip_sigs
 boot
-goto livefedora_labs_exit
+goto live_fedora_labs_exit
 
-:livefedora_labs_exit
+:live_fedora_labs_exit
 clear menu
 exit 0
