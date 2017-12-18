@@ -21,14 +21,14 @@ goto live_fedora_version || chain ${menu}.ipxe || goto live_fedora_exit
 goto live_fedora_exit
 
 :live_fedora_version
-set util_path download.fedoraproject.org/pub/alt/releases/27/Labs/x86_64/iso/Fedora-Security-Live-x86_64-27-1.6.iso
+set util_path https://download.fedoraproject.org/pub/alt/releases/27/Labs/x86_64/iso/Fedora-Security-Live-x86_64-27-1.6.iso
 set util_file Fedora-Security-Live-x86_64-27-1.6.iso
 goto boot_memdisk
 
 :boot_memdisk
 imgfree
 kernel ${memdisk} iso raw
-initrd --name ${util_file} http://${util_path}
+initrd --name ${util_file} ${util_path}
 echo
 echo MD5sums:
 md5sum memdisk ${util_file}
