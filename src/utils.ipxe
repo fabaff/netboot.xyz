@@ -4,6 +4,7 @@ menu Utilities - Image Sig Checks: [${img_sigs_enabled}]
 item --gap Utilities:
 item alt_linux_rescue ${space} ALT Linux Rescue
 item avg ${space} AVG Rescue CD
+item bitdefender ${space} Bitdefender Rescue CD
 item breakin ${space} Breakin
 item clonezilla ${space} Clonezilla
 item dban ${space} DBAN
@@ -39,6 +40,12 @@ goto boot_memdisk
 set avg_version 160420a12074
 set util_path download.avg.com/filedir/inst/avg_arl_cdi_all_120_${avg_version}.iso
 set util_file avg_arl_cdi_all_120_${avg_version}.iso
+goto boot_memdisk
+
+:bitdefender
+set bitdefender_version latest
+set util_path download.bitdefender.com/rescue_cd/${bitdefender_version}/bitdefender-rescue-cd.iso
+set util_file bitdefender-rescue-cd.iso
 goto boot_memdisk
 
 :breakin
