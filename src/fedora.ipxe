@@ -24,10 +24,12 @@ item Everything ${ova} Everything
 item Server ${ova} Server
 item Workstation ${ova} Workstation
 item Atomic ${ova} Atomic
+item IoT ${ova} IoT
 isset ${sku_type} || choose sku_type || goto fedora
 set dir ${fedora_base_dir}/releases/${osversion}/${sku_type}/${arch}/os
 iseq ${sku_type} Atomic && iseq ${osversion} 29 && set dir fedora-alt/atomic/stable/Fedora-Atomic-29-20181030.0/AtomicHost/x86_64/os ||
 iseq ${sku_type} Atomic && iseq ${osversion} 28 && set dir fedora-alt/atomic/stable/Fedora-Atomic-28-20180806.0/AtomicHost/x86_64/os ||
+iseq ${sku_type} IoT && iseq ${osversion} 29 && set dir ${fedora_base_dir}/iot/${osversion}/${sku_type}/${arch}/os ||
 set ova ${ova} ${sku_type}
 echo ${cls}
 goto boottype
